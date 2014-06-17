@@ -20,4 +20,4 @@
 # limitations under the License.
 #
 
-default['jenkins']['plugins']['mirror'] = "#{node['jenkins']['master']]['mirror']}"
+default['jenkins']['plugins']['mirror'] = "#{node['jenkins']['master']['mirror']}"
