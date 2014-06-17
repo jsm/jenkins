@@ -1,4 +1,5 @@
-node.default['jenkins']['plugins'] = [
+# test installation of plugins plus dependencies
+node.default['jenkins']['plugins']['list'] = [
   [
     'git',
     {
@@ -8,5 +9,18 @@ node.default['jenkins']['plugins'] = [
 ]
 
 include_recipe 'jenkins::master'
+
+# Test basic plugin installation
+jenkins_plugin 'greenballs'
+
+# Test installing a specific version
+jenkins_plugin 'disk-usage' do
+  version '0.23'
+end
+
+# Test installing from a URL
+jenkins_plugin 'copy-to-slave' do
+  source 'http://updates.jenkins-ci.org/download/plugins/copy-to-slave/1.4.3/copy-to-slave.hpi'
+end
 
 include_recipe "jenkins::plugins"
