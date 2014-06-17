@@ -82,6 +82,16 @@ class Chef
     def source(arg = nil)
       set_or_return(:source, arg, kind_of: String)
     end
+    
+    #
+    # The mirror where to pull this plugin from.
+    #
+    # @param [String] arg
+    # @return [String]
+    #
+    def mirror(arg = nil)
+      set_or_return(:mirror, arg, kind_of: String)
+    end
 
     #
     # The source where to pull this plugin from.
