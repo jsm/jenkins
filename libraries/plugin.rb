@@ -82,6 +82,16 @@ class Chef
     def source(arg = nil)
       set_or_return(:source, arg, kind_of: String)
     end
+    
+    #
+    # The mirror where to pull this plugin from.
+    #
+    # @param [String] arg
+    # @return [String]
+    #
+    def mirror(arg = nil)
+      set_or_return(:mirror, arg, kind_of: String)
+    end
 
     #
     # The source where to pull this plugin from.
@@ -311,6 +321,7 @@ EOH
       dependencies.each do |dependency|
         plugin = Chef::Resource::JenkinsPlugin.new(dependency[:name], run_context)
         plugin.version(dependency[:version])
+        plugin.mirror("#{new_resource.mirror}")
         plugin.install_dependencies
         plugin.run_action(:install)
       end
@@ -383,9 +394,17 @@ EOH
       return new_resource.source if new_resource.source
 
       if new_resource.version.to_sym == :latest
-        "https://updates.jenkins-ci.org/#{new_resource.version}/#{new_resource.name}.hpi"
+        if defined? new_resource.mirror
+          "#{new_resource.mirror}/#{new_resource.version}/#{new_resource.name}.hpi"
+        else
+          "https://updates.jenkins-ci.org/#{new_resource.version}/#{new_resource.name}.hpi"
+        end
       else
-        "https://updates.jenkins-ci.org/download/plugins/#{new_resource.name}/#{new_resource.version}/#{new_resource.name}.hpi"
+        if defined? new_resource.mirror
+          "#{new_resource.mirror}/plugins/#{new_resource.name}/#{new_resource.version}/#{new_resource.name}.hpi"
+        else
+          "https://updates.jenkins-ci.org/download/plugins/#{new_resource.name}/#{new_resource.version}/#{new_resource.name}.hpi"
+        end
       end
     end
 

@@ -1,3 +1,13 @@
+# test installation of plugins plus dependencies
+node.default['jenkins']['plugins']['list'] = [
+  [
+    'git',
+    {
+      'version' => '2.2.1'
+    }
+  ]
+]
+
 include_recipe 'jenkins::master'
 
 # Test basic plugin installation
@@ -12,3 +22,5 @@ end
 jenkins_plugin 'copy-to-slave' do
   source 'http://updates.jenkins-ci.org/download/plugins/copy-to-slave/1.4.3/copy-to-slave.hpi'
 end
+
+include_recipe "jenkins::plugins"

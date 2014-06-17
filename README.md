@@ -248,6 +248,20 @@ end
 
 **NOTE** You may need to restart Jenkins after changing a plugin. Because this varies on a case-by-case basis (and because everyone chooses to manage their Jenkins infrastructure differently) this LWRP does **NOT** restart Jenkins for you.
 
+# Install a list of plugins including dependencies
+```ruby
+node.default['jenkins']['plugins']['list'] = [
+  [
+    'git',
+    {
+      'version' => '2.2.1'
+    }
+  ]
+]
+
+include_recipe['jenkins::plugins']
+```
+
 ### jenkins_slave
 This resource manages Jenkins slaves, supporting the following actions:
 
