@@ -383,9 +383,9 @@ EOH
       return new_resource.source if new_resource.source
 
       if new_resource.version.to_sym == :latest
-        "https://updates.jenkins-ci.org/#{new_resource.version}/#{new_resource.name}.hpi"
+        "#{new_resource.mirror}/#{new_resource.version}/#{new_resource.name}.hpi"
       else
-        "https://updates.jenkins-ci.org/download/plugins/#{new_resource.name}/#{new_resource.version}/#{new_resource.name}.hpi"
+        "#{new_resource.mirror}/download/plugins/#{new_resource.name}/#{new_resource.version}/#{new_resource.name}.hpi"
       end
     end
 

@@ -39,6 +39,7 @@ node['jenkins']['plugins'].each do |plugin, settings|
   jenkins_plugin plugin do
     version settings['version'] if settings['version']
     source settings['source'] if settings['source']
+    mirror node.default['jenkins']['master']['mirror']
     install_dependencies
   end
 end
