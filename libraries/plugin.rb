@@ -321,6 +321,7 @@ EOH
       dependencies.each do |dependency|
         plugin = Chef::Resource::JenkinsPlugin.new(dependency[:name], run_context)
         plugin.version(dependency[:version])
+        plugin.mirror("#{new_resource.mirror}")
         plugin.install_dependencies
         plugin.run_action(:install)
       end
