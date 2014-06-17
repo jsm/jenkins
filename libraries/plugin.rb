@@ -395,7 +395,7 @@ EOH
       if new_resource.version.to_sym == :latest
         "#{new_resource.mirror}/#{new_resource.version}/#{new_resource.name}.hpi"
       else
-        "#{new_resource.mirror}/download/plugins/#{new_resource.name}/#{new_resource.version}/#{new_resource.name}.hpi"
+        "#{new_resource.mirror}/plugins/#{new_resource.name}/#{new_resource.version}/#{new_resource.name}.hpi"
       end
     end
 
